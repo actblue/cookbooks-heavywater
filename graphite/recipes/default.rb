@@ -3,6 +3,7 @@
 # Recipe:: default
 #
 # Copyright 2011, Heavy Water Software Inc.
+# Modifications by seph
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +18,13 @@
 # limitations under the License.
 #
 
-include_recipe "python"
+directory "#{node[:graphite][:basedir]}/src" do
+  recursive true
+  owner "root"
+  group "root"
+end
+
+
 
 include_recipe "graphite::whisper"
 include_recipe "graphite::carbon"

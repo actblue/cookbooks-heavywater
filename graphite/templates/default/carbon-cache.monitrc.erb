@@ -1,0 +1,11 @@
+##### carbon cache #####
+check process carbon-cache with pidfile <%= node[:graphite][:basedir] %>/storage/carbon-cache.pid
+  group carbon-cache
+  start program = "/usr/bin/env PYTHONPATH=<%= node[:graphite][:basedir] %>/lib/python2.6/site-packages <%= node[:graphite][:basedir] %>/bin/carbon-cache.py start"
+  stop program = "/usr/bin/env PYTHONPATH=<%= node[:graphite][:basedir] %>/lib/python2.6/site-packages <%= node[:graphite][:basedir] %>/bin/carbon-cache.py stop"
+
+  # Various error conditions. Some alerting, some restarting
+  if totalmem is greater than 150.0 MB for 5 cycles then restart       # eating up memory?
+  if cpu is greater than 10% for 2 cycles then alert                   # send an email to admin
+  if cpu is greater than 20% for 3 cycles then restart                 # hung process?
+  if 3 restarts within 5 cycles then timeout                           # something is wrong, call the sys-admin
