@@ -1,4 +1,4 @@
-include_recipe "apache2::mod_python"
+include_recipe "apache2::mod_wsgi"
 
 package "python-cairo-dev"
 package "python-django"
@@ -28,8 +28,22 @@ execute "install graphite-web" do
   cwd "#{node[:graphite][:basedir]}/src/graphite-web-#{node.graphite.graphite_web.version}"
 end
 
+template "#{node[:graphite][:basedir]}/conf/graphite.wsgi" do
+  source "graphite.wsgi.erb"
+  mode "0644"
+  notifies :restart, resources(:service => "apache2"), :delayed
+end
+
+template "#{node[:graphite][:basedir]}/webapp/graphite/local_settings.pyi" do
+  source "graphite-web-local_settings.py.erb"
+  mode "0644"
+  notifies :restart, resources(:service => "apache2"), :delayed
+end
+
+
 template "#{node[:apache][:dir]}/sites-available/graphite" do
   source "graphite-vhost.conf.erb"
+  mode "0644"
   notifies :restart, resources(:service => "apache2"), :delayed
 end
 apache_site "graphite"
