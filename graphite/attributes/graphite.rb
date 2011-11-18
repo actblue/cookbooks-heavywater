@@ -30,7 +30,7 @@ default[:graphite][:carbon][:cache][:conf] = {
 
   # By default, carbon-cache will log every whisper update. This can be excessive and
   # degrade performance if logging on the same volume as the whisper data is stored.
-  :log_updates => "True",
+  :log_updates => "False",
 
 
   :line_receiver_interface => "127.0.0.1",
