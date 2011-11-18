@@ -21,9 +21,6 @@ end
 
 template "#{node[:graphite][:basedir]}/conf/carbon.conf" do
   mode "0644"
-  variables( :line_receiver_interface => node[:graphite][:carbon][:line_receiver_interface],
-             :pickle_receiver_interface => node[:graphite][:carbon][:pickle_receiver_interface],
-             :cache_query_interface => node[:graphite][:carbon][:cache_query_interface] )
   notifies :restart, "service[carbon-cache]"
 end
 
