@@ -1,5 +1,7 @@
 default[:graphite][:basedir] = "/opt/graphite"
 
+default[:graphite][:log_keep_days] = 7
+
 default[:graphite][:carbon][:cache][:conf] = {
   # Specify the user to drop privileges to
   # If this is blank carbon runs as the user that invokes it
@@ -11,11 +13,12 @@ default[:graphite][:carbon][:cache][:conf] = {
   # Use the value "inf" (infinity) for an unlimited cache size.
   :max_cache_size => "inf",
 
-  # Limits the number of whisper update_many() calls per second, which effectively
-  # means the number of write requests sent to the disk. This is intended to
-  # prevent over-utilizing the disk and thus starving the rest of the system.
-  # When the rate of required updates exceeds this, then carbon's caching will
-  # take effect and increase the overall throughput accordingly.
+  # Limits the number of whisper update_many() calls per second, which
+  # effectively means the number of write requests sent to the
+  # disk. This is intended to prevent over-utilizing the disk and thus
+  # starving the rest of the system.  When the rate of required
+  # updates exceeds this, then carbon's caching will take effect and
+  # increase the overall throughput accordingly.
   :max_updates_per_second => 100,
 
   # Softly limits the number of whisper files that get created each
@@ -28,8 +31,9 @@ default[:graphite][:carbon][:cache][:conf] = {
   # but at the risk of slowing I/O down considerably for a while.
   :max_creates_per_minute => "inf",
 
-  # By default, carbon-cache will log every whisper update. This can be excessive and
-  # degrade performance if logging on the same volume as the whisper data is stored.
+  # By default, carbon-cache will log every whisper update. This can
+  # be excessive and degrade performance if logging on the same volume
+  # as the whisper data is stored.
   :log_updates => "False",
 
 

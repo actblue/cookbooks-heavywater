@@ -36,3 +36,15 @@ service "carbon-cache" do
   stop_command "monit stop carbon-cache"
   action :start
 end
+
+# Nuke carbon logs that need nuking
+template "/usr/local/sbin/carbon-log-cleaner.sh" do
+  source "carbon-log-cleaner.sh.erb"
+  mode "0755"
+end
+cron "carbon log cleaner" do
+  command "/usr/local/sbin/carbon-log-cleaner.sh"
+  minute 15
+  hour 4
+  user "root"
+end
