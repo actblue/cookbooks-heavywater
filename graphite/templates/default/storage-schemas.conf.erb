@@ -1,9 +1,9 @@
 [stats]
 priority = 100
 pattern = ^stats\..*
-retentions = 10:2160,60:10080,600:262974
+retentions = 10s:7d,30m:30d,1h:2y
 
 [catchall]
 priority = 0
 pattern = ^.*
-retentions = 60:565920
+retentions = 15s:7d,30m:30d,1h:2y
