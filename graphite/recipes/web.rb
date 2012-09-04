@@ -28,6 +28,11 @@ execute "install graphite-web" do
   cwd "#{node[:graphite][:basedir]}/src/graphite-web-#{node.graphite.graphite_web.version}"
 end
 
+template ::File.join(node[:graphite][:basedir], 'conf', 'users.htpass') do
+  source "users.htpass.erb"
+  mode "0644"
+end
+
 template "#{node[:graphite][:basedir]}/conf/graphite.wsgi" do
   source "graphite.wsgi.erb"
   mode "0644"
