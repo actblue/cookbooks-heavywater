@@ -39,7 +39,7 @@ template "#{node[:graphite][:basedir]}/conf/graphite.wsgi" do
   notifies :restart, resources(:service => "apache2"), :delayed
 end
 
-template "#{node[:graphite][:basedir]}/webapp/graphite/local_settings.pyi" do
+template "#{node[:graphite][:basedir]}/webapp/graphite/local_settings.py" do
   source "graphite-web-local_settings.py.erb"
   mode "0644"
   notifies :restart, resources(:service => "apache2"), :delayed
