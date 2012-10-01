@@ -50,7 +50,9 @@ WSGIImportScript <%= node[:graphite][:basedir] %>/conf/graphite.wsgi process-gro
 <% end -%>
 		  Satisfy any
 	</Location>
-
+        Header set Access-Control-Allow-Origin "*"
+        Header set Access-Control-Allow-Methods "GET, OPTIONS"
+        Header set Access-Control-Allow-Headers "origin, authorization, accept"
 
 </VirtualHost>
 
