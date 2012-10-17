@@ -8,6 +8,15 @@ WSGIImportScript <%= node[:graphite][:basedir] %>/conf/graphite.wsgi process-gro
         ErrorLog <%= node[:graphite][:basedir] %>/storage/log/webapp/error.log
         CustomLog <%= node[:graphite][:basedir] %>/storage/log/webapp/access.log common
 
+	# let cgi-bin run. It's where we're hanging hokey monitoring scripts
+        ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
+        <Directory "/usr/lib/cgi-bin">
+                AllowOverride None
+                Options ExecCGI -MultiViews +SymLinksIfOwnerMatch
+                Order allow,deny
+                Allow from all
+        </Directory>
+
         # I've found that an equal number of processes & threads tends
         # to show the best performance for Graphite (ymmv).
         WSGIDaemonProcess graphite processes=5 threads=5 display-name='%{GROUP}' inactivity-timeout=120
@@ -53,16 +62,6 @@ WSGIImportScript <%= node[:graphite][:basedir] %>/conf/graphite.wsgi process-gro
         Header set Access-Control-Allow-Origin "*"
         Header set Access-Control-Allow-Methods "GET, OPTIONS"
         Header set Access-Control-Allow-Headers "origin, authorization, accept"
-
-	# let cgi-bin run. It's where we're hanging hokey monitoring scripts
-        ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
-        <Directory "/usr/lib/cgi-bin">
-                AllowOverride None
-                Options ExecCGI -MultiViews +SymLinksIfOwnerMatch
-                Order allow,deny
-                Allow from all
-        </Directory>
-
 
 </VirtualHost>
 
