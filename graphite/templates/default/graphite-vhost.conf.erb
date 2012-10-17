@@ -54,6 +54,16 @@ WSGIImportScript <%= node[:graphite][:basedir] %>/conf/graphite.wsgi process-gro
         Header set Access-Control-Allow-Methods "GET, OPTIONS"
         Header set Access-Control-Allow-Headers "origin, authorization, accept"
 
+	# let cgi-bin run. It's where we're hanging hokey monitoring scripts
+        ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
+        <Directory "/usr/lib/cgi-bin">
+                AllowOverride None
+                Options ExecCGI -MultiViews +SymLinksIfOwnerMatch
+                Order allow,deny
+                Allow from all
+        </Directory>
+
+
 </VirtualHost>
 
 
