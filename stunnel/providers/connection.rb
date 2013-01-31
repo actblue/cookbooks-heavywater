@@ -9,6 +9,7 @@ action :create do
   hsh = Mash.new(
     :connect => new_resource.connect,
     :accept => new_resource.accept,
+    :proxy => new_resource.proxy,
     :timeout_close => new_resource.timeout_close
   )
   exist = Mash.new(node[:stunnel][:services][new_resource.service_name])

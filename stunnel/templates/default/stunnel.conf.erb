@@ -77,7 +77,13 @@ TIMEOUTclose = 0
 <% node[:stunnel][:services].each do |name, opts| -%>
 [<%= name %>]
 accept = <%= opts[:accept] %>
+<% if opts[:proxy].nil? -%>
 connect = <%= opts[:connect] %>
+<% else -%>
+connect = <%= opts[:proxy] %>
+protocol = connect
+protocolHost = <%= opts[:connect] %>
+<% end -%>
 <% unless opts[:timeout_close].nil? -%>
 TIMEOUTclose = <%= opts[:timeout_close] ? 1 : 0 %>
 <% end -%>
