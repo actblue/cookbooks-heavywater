@@ -54,8 +54,8 @@ WSGIImportScript <%= node[:graphite][:basedir] %>/conf/graphite.wsgi process-gro
 		  AuthUserFile "<%= ::File.join(node[:graphite][:basedir], 'conf', 'users.htpass') %>"
 		  Require valid-user
 		  Order allow,deny
-<% node[:graphite][:graphite_web][:allowed_ips].sort.uniq.each do |IP| -%>
-		  Allow from <%= IP %>
+<% node[:graphite][:graphite_web][:allowed_ips].sort.uniq.each do |ip| -%>
+		  Allow from <%= ip %>
 <% end -%>
 		  Satisfy any
 	</Location>

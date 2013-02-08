@@ -1,6 +1,6 @@
 # MANAGED BY CHEF
 #
 # This file grants access to users outside of the allowed IPs.
-<% node[:graphite][:graphite_web][:apache_users].sort.uniq.each do |USER| -%>
-<%= USER %>
+<% node[:graphite][:graphite_web][:apache_users].sort.uniq.each do |user| -%>
+<%= user %>
 <% end -%>
