@@ -74,7 +74,7 @@ TIMEOUTclose = 0
 ;xforwardedfor=yes ; This line requires the haproxy patch
 <% end %>
 
-<% node[:stunnel][:services].each do |name, opts| -%>
+<% node[:stunnel][:services].sort_by {|name, opts| name }.each do |name, opts| -%>
 [<%= name %>]
 accept = <%= opts[:accept] %>
 <% if opts[:proxy].nil? -%>
