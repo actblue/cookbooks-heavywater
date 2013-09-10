@@ -11,6 +11,6 @@ end
 
 execute "install whisper" do
   command "python setup.py install --prefix #{node[:graphite][:basedir]}"
-  creates "#{node[:graphite][:basedir]}/lib/python2.6/site-packages/whisper-#{node[:graphite][:whisper][:version]}-py2.6.egg-info"
+  creates "#{node[:graphite][:basedir]}/lib/python#{node[:graphite][:python][:version]}/site-packages/whisper-#{node[:graphite][:whisper][:version]}-py#{node[:graphite][:python][:version]}.egg-info"
   cwd "#{node[:graphite][:basedir]}/src/whisper-#{node.graphite.whisper.version}"
 end

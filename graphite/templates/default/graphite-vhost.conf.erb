@@ -35,7 +35,7 @@ WSGIImportScript <%= node[:graphite][:basedir] %>/conf/graphite.wsgi process-gro
         # XXX In order for the django admin site media to work you
         # must change @DJANGO_ROOT@ to be the path to your django
         # installation, which is probably something like:
-        # /usr/lib/python2.6/site-packages/django
+        # /usr/lib/pythonX.Y/site-packages/django
         Alias /media/ "@DJANGO_ROOT@/contrib/admin/media/"
         <Location "/media/">
                 SetHandler None

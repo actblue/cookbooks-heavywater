@@ -1,5 +1,5 @@
 import os, sys
-sys.path.append('<%= node[:graphite][:basedir] %>/lib/python2.6/site-packages')
+sys.path.append('<%= node[:graphite][:basedir] %>/lib/python<%= node[:graphite][:python][:version] %>/site-packages')
 sys.path.append('<%= node[:graphite][:basedir] %>/webapp')
 os.environ['DJANGO_SETTINGS_MODULE'] = 'graphite.settings'
 

@@ -1,8 +1,8 @@
 ##### carbon cache #####
 check process carbon-cache with pidfile <%= node[:graphite][:basedir] %>/storage/carbon-cache.pid
   group carbon-cache
-  start program = "/usr/bin/env PYTHONPATH=<%= node[:graphite][:basedir] %>/lib/python2.6/site-packages <%= node[:graphite][:basedir] %>/bin/carbon-cache.py start"
-  stop program = "/usr/bin/env PYTHONPATH=<%= node[:graphite][:basedir] %>/lib/python2.6/site-packages <%= node[:graphite][:basedir] %>/bin/carbon-cache.py stop"
+  start program = "/usr/bin/env PYTHONPATH=<%= node[:graphite][:basedir] %>/lib/python<%= node[:graphite][:python][:version] %>/site-packages <%= node[:graphite][:basedir] %>/bin/carbon-cache.py start"
+  stop program = "/usr/bin/env PYTHONPATH=<%= node[:graphite][:basedir] %>/lib/python<%= node[:graphite][:python][:version] %>/site-packages <%= node[:graphite][:basedir] %>/bin/carbon-cache.py stop"
 
   # Various error conditions. Some alerting, some restarting
   if totalmem is greater than 150.0 MB for 5 cycles then restart       # eating up memory?

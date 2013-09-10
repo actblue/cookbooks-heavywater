@@ -18,6 +18,8 @@
 # limitations under the License.
 #
 
+node.set[:graphite][:python][:version] = value_for_platform('ubuntu' => {'12.04' => '2.7', 'default' => '2.6'}, 'default' => '2.6')
+
 directory "#{node[:graphite][:basedir]}/src" do
   recursive true
   owner "root"
