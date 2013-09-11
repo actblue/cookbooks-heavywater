@@ -1,6 +1,9 @@
 NameVirtualHost *:80
 
-WSGIImportScript <%= node[:graphite][:basedir] %>/conf/graphite.wsgi process-group=graphite application-group=%{GLOBAL}
+# At some point in the future we may want to set up a daemon mode so we
+# can put an explicit process group here. For now, keep it simple (newer
+# Apache doesn't let you make up a group that doesn't exist.)
+WSGIImportScript <%= node[:graphite][:basedir] %>/conf/graphite.wsgi process-group=%{GLOBAL} application-group=%{GLOBAL}
 
 <VirtualHost *:80>
         ServerName graphite
