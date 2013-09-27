@@ -25,6 +25,7 @@ template "#{node[:graphite][:basedir]}/conf/carbon.conf" do
 end
 
 template "#{node[:graphite][:basedir]}/conf/storage-schemas.conf"
+template "#{node[:graphite][:basedir]}/conf/storage-aggregation.conf"
 
 monit_fragment "carbon-cache" do
   source "carbon-cache.monitrc.erb"
